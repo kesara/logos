@@ -23,12 +23,13 @@ def getLogo(software_list):
         return getLogo(software_list)
     try:
         info = wikipedia.page(entry)
-    except Exception as e:
-        print(e)
+    except:
+        print('Error processing data. searching...')
         return getLogo(software_list)
     images = info.images
     logo = None
     if not images:
+        print('No logo on this Wiki entry :( searching...')
         return getLogo(software_list)
     else:
         logo = findLogo(entry, images)
@@ -39,6 +40,7 @@ def getLogo(software_list):
             'summary': info.summary,
             'logo': logo}
     else:
+        print('No logo on this Wiki entry :( searching...')
         return getLogo(software_list)
 
 
@@ -89,6 +91,7 @@ def game():
                 url=entry['url'],
                 summary=entry['summary']))
         except:
+            print('Error displaying log.')
             pass
     print('{wins} wins out of {entries}'.format(wins=wins, entries=entries))
 
